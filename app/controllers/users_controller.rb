@@ -5,8 +5,9 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(user_params)    # Not the final implementation!
+    @user = User.new(user_params)    
     if @user.save
+      sign_in @user
       flash[:success] = @user.name.capitalize + ", спасибо за регистрацию!"
       redirect_to @user
     else
